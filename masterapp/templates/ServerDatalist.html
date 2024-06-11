@@ -1,0 +1,182 @@
+
+{%block body_block%}
+
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %} 
+     {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
+      <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">  
+      <link rel="stylesheet" href="{% static 'css/buttonstyle.css' %}">   
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />  
+    <script type="text/javascript"> 
+      window.history.forward(); 
+      function noBack() { 
+          window.history.forward();
+          style="pointer-events: none;";"cursor: default"
+
+      } 
+      
+      function myFunction() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); },10000);
+      }
+  </script>
+
+  
+ 
+  </head> 
+  
+  <nav class="navbar bg- border-bottom border-body" data-bs-theme="white" style="background-color:#616D7E" >
+    
+    
+      
+   <div class="container">
+    <h2 class="title">
+      <span class="title-word title-word-1">TRACK</span>
+      <span class="title-word title-word-2">AND</span>
+      <span class="title-word title-word-3">TRACE</span>
+      
+    </h2>
+    {% comment %} <font face="times new roman" size="5" style="color:white"> Welcome {{name}}</font> {% endcomment %}
+    <font face="times new roman" size="5" style="color:#9AFEFF" class='flipY'>  Welcome {{name}}</font>
+
+    <form action="{%url 'serverlistsearch'  %}" method="get" class="d-flex"  >   
+      <div class="col-8">
+        <input class="form-control me-2" type="text" name="query" placeholder="Enter Lot Number" aria-label="Search" >
+      </div>&nbsp;&nbsp;&nbsp;
+      <div class="col-4">
+        <button class="btn btn-success" type="submit">Search</button></div> 
+      </div>
+    </form>
+  </div>
+</div>
+ 
+     
+      
+     
+    
+   
+    </div>
+   
+   
+  </nav>
+  <br/>
+
+  <div class="row">
+    <div class="col-3"> 
+      &nbsp;&nbsp;&nbsp;<a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>    
+    </div>
+    {% if successmes == 1 %}
+    <div class="col-6">
+
+      <div id="snackbar">
+        <img src="{% static 'css/success.gif' %}"  style="width:10%;height:30px;">&nbsp;Data Send To Server Successfully..</img> 
+      </div> 
+    
+    </div>
+    {% elif successmes == 1 %}
+    <div class="col-6">
+
+      <div id="snackbar">
+        <img src="{% static 'css/error.gif' %}"  style="width:10%;height:30px;">&nbsp;&nbsp;Data Did Not Send To Server Because Of The Lost Of Server Connection.</img> 
+       </div> 
+    </div>
+    {% endif %}
+    <div class="col-3">
+      {% if search == 1 %}
+      <a href="{%url 'serverdatalist' %}" class="btn btn-info" style= "color:black;" >Back To List Page</a>   
+    
+        
+      {% endif %} 
+     
+     
+    </div>
+    <div class="col-1">      
+    </div>
+  </div>
+  <center> <font class="animate-charcter"  face="times new roman" size="2">SERVER</font></center>
+  <br/>
+  {% if nu == 1 %}
+  <center> <font  face="times new roman" size="4">No Data Available In This List</font></center>
+  {% endif %}
+  <div class="container-fluid">
+  <div class="row" >
+  <div class="table-responsive text-nowrap">      
+  <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px; background-color:#616D7E;" >
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <thead >
+      <tr>
+        <tr>
+         
+            <th style="color:red;" scope="col">id</th>
+            <th style="color:red;" scope="col">Gtin</th>
+            <th style="color:red;" scope="col">Lot</th>
+            <th style="color:red;" scope="col">Po Number</th>
+
+            <th style="color:red;" scope="col">Expire Date</th>
+            <th style="color:red;" scope="col">Type</th>
+            <th style="color:red;" scope="col">Status</th>
+            <th style="color:red;" scope="col">Action</th>
+        </tr>
+      </tr>
+    </thead>
+    
+    {% for job in page_obj %}
+    <tbody >
+      <tr style="color:white;">
+        <td style="color:white">{{job.id}}</td>
+        <td style="color:white">{{job.gtin}}</td>
+        <td style="color:white">{{job.lot}}</td>
+        <td style="color:white">{{job.processordernumber}}</td>
+        <td style="color:white">{{job.expiration_date}}</td>
+        <td style="color:white">{{job.type}}</td>
+        <td style="color:white" >{{job.status}}</td>
+       <div class="col-12" >  
+        <td colspan="4" >
+          {% if job.status == "Closed" %}
+          <a href="{%url 'getserverdata' job.id %}" onclick="myFunction()" class="btn btn-danger m-1 " data-role="disabled" style="pointer-events: none; width:45%;height:40px; border-radius: 40px;";"cursor:pointer";  > Data Sended </a>  
+          {% elif job.pause_stop_btnresponse == 1 %}
+
+          <a href="{%url 'getserverdata' job.id %}" onclick="myFunction()"  class="button"  > Send To Server  </a>   
+          {% else %}  
+        
+          <a href="{%url 'getserverdata' job.id %}" onclick="myFunction()" class="btn btn-success m-1" style="border-radius: 40px;width:45%;height:40px"  > Send To Server  </a>   
+          {% endif %}  
+        </td>
+      </div> 
+      </tr>
+        {% endfor %}   
+    </tbody>
+  </table>
+</div>  
+</div> 
+</div> 
+
+<div class="row">
+  <div class="col-6"></div>
+  <div class="col-6">
+    <center>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" >
+          {% if page_obj.has_previous %} 
+          <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
+           {% endif %}
+          <li class="page-item"><a class="page-link" style="color:red;" href="#">{{page_obj.number}}</a></li>
+          {% if page_obj.has_next %} 
+         <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
+         {% endif %}
+        </ul>
+      </nav>
+    </center>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,285 @@
+
+{%block body_block%}
+
+<head>  
+    <meta charset="UTF-8">  
+                    <title>Index</title>  
+                    {% load static %} 
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
+                    <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">   
+                     <link
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+                    rel="stylesheet"
+                    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+                    crossorigin="anonymous"
+                    />  
+                    <script type="text/javascript"> 
+                                        window.history.forward(); 
+                                        function noBack() { 
+                                        window.history.forward();
+                                        style="pointer-events: none;";"cursor: default"
+
+                                        } 
+      
+                    </script>
+ 
+</head> 
+  
+<nav class="navbar  border-bottom border-body" style="background:#473810;" data-bs-theme="white" >
+
+
+
+<div class="container" id="current">
+  <h2 class="title">
+    <span class="title-word title-word-1">TRACK</span>
+    <span class="title-word title-word-2">AND</span>
+    <span class="title-word title-word-3">TRACE</span>
+    
+  </h2>
+  {% comment %} <font face="times new roman" size="5" style="color:white"> Welcome {{name}}</font> {% endcomment %}
+  <font face="times new roman" size="5" style="color:#87AFC7" class='flipY'>  Welcome {{name}}</font>
+
+  <a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>   
+</div>
+</div>                  
+
+
+
+                   
+                   
+</nav>
+                 
+
+                
+                  <br/>
+                  <center>
+                  {% if headname == 2%}
+                  <img src="{% static 'css/warning.gif' %}"  style=";height:50px;">&nbsp;&nbsp;&nbsp;<font   face="times new roman" size="4">   After Send To  Server This Report Only Visible In Server</font></img>     
+                  {% endif %} 
+                  </center> 
+                 
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                      <symbol id="check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                      </symbol>
+                      <symbol id="info-fill" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                      </symbol>
+                      <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </symbol>
+                    </svg>
+                     
+                    {% if mess == 500%} 
+                <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
+                  <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg>
+                 No Reports Available In This Batch Number.
+                    
+                </div>
+              {% endif %}  
+                  </div>
+
+  <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#dcdcdc">
+                    <div class="row">
+                      {% if headname == 2%}
+                      <div classname="col-10">
+                        <center> <font class="animate-charcter"  face="times new roman" size="2"> PRODUCTION REPORT AFTER STOP BATCH</font></center>
+                      </div>
+                      {% else %}
+                      <div classname="col-10">
+                        <center> <font class="animate-charcter"  face="times new roman" size="2"> CURRENT PRODUCTION REPORT </font></center>
+                      </div>
+                      {% endif %}
+                      <div classname="col-2">
+                       
+                      </div>
+                     
+                    </div>
+         
+                    <div class="row">
+                      <div class="col-9">
+                        
+                      </div>
+                      <div class="col-3">
+                          {% comment %} {% if qs.return_slno_btn_response == 0 and  sd != 1 %} {% endcomment %}
+   
+                          {% comment %} {% endif %}  {% endcomment %}
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                                        <div class="col-3">
+                                        </div> 
+                                        <div class="col-6">
+                                        {% comment %} <div class="col-1"></div> {% endcomment %}
+                                        {% comment %} <div class="row"> {% endcomment %}
+                                                          
+                                        <form action="{%url 'productionreport'  %}" method="get" class="d-flex"  >   
+                                        {% comment %} <div class="col-4"> {% endcomment %}
+                                        <input class="form-control me-2" type="text" name="lot" placeholder="Enter Batch Number" aria-label="Search" >
+                                        <button class="btn btn-success" type="submit">Details</button></div> 
+                                        {% comment %} </div> {% endcomment %}
+                                        {% comment %} <div class="col-2">
+                                       
+                                        </div> {% endcomment %}
+                                        </form>
+                                        {% comment %} </div> {% endcomment %}
+                                        <div class="col-3">
+                                        </div> 
+                                                         
+                                        </div>
+
+                                        <div class="row">
+                                                            <div class="col-3">
+                                                              <h5 >Batch</h5> 
+                                                              <br></br>   
+                                                              <h5>Expiry Date</h5>
+                                                              <br></br>
+                                                               
+                                                                
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <input type="text" readOnly="true" style="width:80%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.lot }}"/>
+                                                                <br></br>  
+                                                                <input  type="text" readOnly="true" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.expiration_date}}" /> 
+                                                                <br></br>
+                                                               
+                                                            </div>
+                                                            <div class="col-3">
+                                                           
+                                                                <h5 >Processorder Number</h5>   
+                                                                <br></br>
+                                                                <h5 >Gtin</h5>
+                                                                <br></br> 
+                                                            </div>
+                                                            
+                                                            <div class="col-3">
+                                                              
+                                                                <input type="text" readOnly="true" style="width:80%;height:50px"   name="eemail" id="id_eemail" required maxlength="254" value="{{ qs.processordernumber }}" /> 
+                                                                <br></br>
+                                                                <input type="text" readOnly="true" style="width:80%;height:50px"   name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin }}" />   
+                                                                <br></br>    
+                                                            </div>
+                                                            
+                                                            
+
+                                                            
+                                                          </div>
+                                                        
+                                                          
+                                        </div>
+                                        <br/>
+                                          </div>
+                                          <br/>
+                                          
+
+                                          <div class="container"style="border: 4px solid rgb(51, 74, 72);">
+                                                          <div class="row">
+                                                              {% comment %} <div class="col-4"> 
+                                                          
+                                                              </div> {% endcomment %}
+                                                              
+
+                                                                <div class="col-6">  
+                                            <div class="container">
+                                            <div class="row" >
+                                            <div class="table-responsive text-nowrap"> 
+                                              <br/> <br/>    
+                                            <table   class="table table-dark table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:200px;">
+                                              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                  <tr>
+                                                      <th style="color:red;" scope="col">Accepted</th>
+                                                      <td>{{acceptedcount}}</td> 
+                                                  </tr>
+
+                                                  <tr>
+                                                    <th style="color:red;" scope="col">Rejected</th>
+                                                    <td>{{rejectedcount}}</td>           
+                                                  </tr>
+                                                  <tr>
+                                                  {% comment %} <tr>
+                                                     <th style="color:red;" scope="col">Rejected By Camera</th>
+                                                     <td>5866</td>         
+                                                  </tr> {% endcomment %}
+                                                  <tr> 
+                                                    <th style="color:red;" scope="col">Sample</th>
+                                                    <td>{{samplecount}}</td>    
+                                                  </tr>
+                                                  <tr>
+                                                    <th style="color:red;" scope="col">Challenged</th>
+                                                    <td>{{challengedcount}}</td>           
+                                                  </tr>
+                                                  <tr>
+                                                     <th style="color:red;" scope="col">Specimen</th>
+                                                     <td>{{specimencount}}</td>
+                                                  </tr>
+                                                  <tr>
+                                                            <th style="color:red;" scope="col">Damaged</th>
+                                                            <td>{{damagedcount}}</td>
+                                                         </tr>
+                                                         <tr>
+                                                            <th style="color:red;" scope="col">Others</th>
+                                                            <td>{{otherscount}}</td>
+                                                         </tr>
+                                                
+                                            
+                                              
+                                             
+                                            </table>
+                                          </div>  
+                                          </div> 
+                                          </div> 
+                                          </div>
+                                          <div class="col-6"> 
+                                            <canvas id="myChart" style="width:100%;max-width:600px;min-width:0;"></canvas>
+
+                                            <script>
+                                            const xValues = ["Challenged", "Damaged", "Others", "Specimen", "Sample","Accepted","Rejected"];
+                                            const yValues = [{{challengedcount}},{{damagedcount}},{{otherscount}}, {{specimencount}},{{samplecount}},{{acceptedcount}},{{rejectedcount}}];
+                                            const barColors = [
+                                              "#b91d47",
+                                              "#00aba9",
+                                              "#2b5797",
+                                              "#e8c3b9",
+                                              "#1e7145",
+                                              "#648c11",
+                                              "#c80815"
+                                            ];
+                                            
+                                            new Chart("myChart", {
+                                              type: "pie",
+                                              data: {
+                                                labels: xValues,
+                                                datasets: [{
+                                                  backgroundColor: barColors,
+                                                  data: yValues
+                                                }]
+                                              },
+                                              options: {
+                                                title: {
+                                                  display: true,
+                                                  text: "Production Report"
+                                                }
+                                              }
+                                            });
+                                            </script>
+                                          </div>
+                                       
+                                          </div>
+                                          <br/>
+                                        </div>
+
+                                          
+                                                           
+                                        </div>
+                                               
+
+                    <br></br>
+                    
+
+
+
+
+{% endblock %}

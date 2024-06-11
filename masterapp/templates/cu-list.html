@@ -1,0 +1,190 @@
+
+{%block body_block%}
+
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %} 
+     {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
+      <link rel="stylesheet" href="{% static 'css/headings.css' %}">   
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />  
+    <script type="text/javascript"> 
+      window.history.forward(); 
+      function noBack() { 
+          window.history.forward();
+          style="pointer-events: none;";"cursor: default"
+
+      } 
+      
+  </script>
+ 
+  </head> 
+  
+  <nav class="navbar bg- border-bottom border-body" data-bs-theme="white" style="background-color:#25383C" >
+    
+    {% comment %} <h3 style="color:white">TRACK AND TRACE</h3>  {% endcomment %}
+   
+    <div class="container">
+      <h2 class="title">
+        <span class="title-word title-word-1">TRACK</span>
+        <span class="title-word title-word-2">AND</span>
+        <span class="title-word title-word-3">TRACE</span>
+        
+      </h2>
+      {% comment %} <font face="times new roman" size="5" style="color:white"> Welcome {{name}}</font> {% endcomment %}
+      <font face="times new roman" size="5" style="color:#DAEE01" class='flipY'>  Welcome {{name}}</font>
+
+      <form action="{%url 'search'  %}" method="get" class="d-flex"  >   
+        <div class="col-8">
+          <input class="form-control me-2" type="text" name="query" placeholder="Enter Lot Number" aria-label="Search" >
+        </div>&nbsp;&nbsp;&nbsp;
+        <div class="col-4">
+          <button class="btn btn-success" type="submit">Search</button></div> 
+        </div>
+      </form>
+    </div>
+    
+    {% comment %} <div class="row">
+      <font face="times new roman" size="5" style="color:white"> Welcome {{name}}</font>
+    
+     <div class="col-12">
+     
+    </div> 
+    
+    </div>  {% endcomment %}
+  </div>
+   {% comment %} <div class="row">
+    <div class="col-12" >
+      <div class="row">
+        <form action="{%url 'search'  %}" method="get" class="d-flex"  >   
+        <div class="col-8">
+          <input class="form-control me-2" type="text" name="query" placeholder="Enter Lot Number" aria-label="Search" >
+        </div>&nbsp;&nbsp;&nbsp;
+        <div class="col-4">
+          <button class="btn btn-success" type="submit">Search</button></div> 
+        </div>
+      </form>
+      </div>
+ 
+    </div>
+    {% endcomment %}
+   </div>
+      
+     
+ 
+     
+      
+     
+    
+   
+    </div>
+   
+   
+  </nav>
+  <br/>
+
+  <div class="row">
+    <div class="col-9"> 
+      &nbsp;&nbsp;&nbsp;<a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>    
+    </div>
+    <div class="col-3">
+      {% if search == 1 %}
+      <a href="{%url 'indexpage' %}" class="btn btn-info" style= "color:black;" >Back To List Page</a>   
+    
+        
+      {% endif %} 
+     
+     
+    </div>
+    <div class="col-1">      
+    </div>
+  </div>
+ 
+  <center> <font class="animate-charcter"  face="times new roman" size="2">Job Management</font></center>
+  <br/>
+  {% if nu == 1 %}
+  <center> <font  face="times new roman" size="4">No Data Available In This List</font></center>
+  {% endif %}
+  <div class="container-fluid">
+  <div class="row" >
+  <div class="table-responsive text-nowrap">      
+  <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px; background-color:#25383C;" >
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <thead >
+      <tr>
+        <tr>
+         
+            <th style="color:red;" scope="col">id</th>
+            <th style="color:red;" scope="col">Gtin</th>
+            <th style="color:red;" scope="col">Lot</th>
+            <th style="color:red;" scope="col">Po Number</th>
+
+            <th style="color:red;" scope="col">Expire Date</th>
+            <th style="color:red;" scope="col">Type</th>
+            <th style="color:red;" scope="col">Status</th>
+            <th style="color:red;" scope="col">Action</th>
+        </tr>
+      </tr>
+    </thead>
+    
+    {% for job in page_obj %}
+    <tbody >
+      <tr style="color:white;">
+        <td style="color:white">{{job.id}}</td>
+        <td style="color:white">{{job.gtin}}</td>
+        <td style="color:white">{{job.lot}}</td>
+        <td style="color:white">{{job.processordernumber}}</td>
+        <td style="color:white">{{job.expiration_date}}</td>
+        <td style="color:white">{{job.type}}</td>
+        <td style="color:white" >{{job.jobstatus}}</td>
+       <div class="col-12 col-lg-6 col-md-8" >  
+        <td colspan="4">
+          {% if job.jobstatus == "Added" %}
+          
+              <a href="{%url 'autovision' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Added </pre> </a>
+          {% elif job.status == "Printing Finished" %}
+          <a href="{%url 'autovision' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Printing Finished </pre> </a>
+          {% elif job.responsefield == 1 %}
+          <a href="{%url 'autovision' job.id%}" class="btn btn-warning m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Add Job </pre> </a>  
+           {% else %}  
+           
+             <a href="{%url 'autovision' job.id%}" onClick="window.location.reload();"  class="btn btn-success m-1">Add Job</a>  
+
+         
+          {% endif %}  
+        </td>
+      </div> 
+      </tr>
+        {% endfor %}   
+    </tbody>
+  </table>
+</div>  
+</div> 
+</div> 
+
+<div class="row">
+  <div class="col-6"></div>
+  <div class="col-6">
+    <center>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" >
+          {% if page_obj.has_previous %} 
+          <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
+           {% endif %}
+          <li class="page-item"><a class="page-link" style="color:red;" href="#">{{page_obj.number}}</a></li>
+          {% if page_obj.has_next %} 
+         <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
+         {% endif %}
+        </ul>
+      </nav>
+    </center>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+  /* #informationpage{
+                    margin-left: 580px;
+                    margin-top: 170px;
+                    border: 4px solid rgb(16, 14, 22);
+                    border-radius: 25px;
+                    width: 40%;
+                    height: 200px; 
+                    animation-name: example;
+                    animation-duration: 10s;
+                  
+                    position: fixed;
+                    animation-iteration-count: infinite;
+                   
+                  }
+                   
+                  
+                  @keyframes example {
+                    0%   {background: linear-gradient(90deg, rgba(34,48,48,1) 12%, rgba(7,9,2,1) 42%, rgba(38,91,73,1) 91%); left:0px; top:0px;}
+                    25%  {background: linear-gradient(90deg, rgba(22,19,16,1) 13%, rgba(7,9,2,1) 42%, rgba(43,22,17,1) 91%); left:200px; top:0px;}
+                    50%  {background: linear-gradient(90deg, rgba(102,49,66,1) 10%, rgba(34,43,82,1) 42%); left:200px; top:200px;}
+                    75%  {background: linear-gradient(90deg, rgb(88, 129, 162) 10%, rgba(51,34,82,1) 42%); left:0px; top:200px;}
+                    100% {background-color:rgb(76, 136, 163); left:0px; top:0px;}
+                  }  */

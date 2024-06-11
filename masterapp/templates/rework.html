@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+  <html lang="en">  
+    <head>  
+      <meta charset="UTF-8">  
+        <title>Index</title>  
+        {% load static %} 
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous"
+        /> 
+        
+    </head>   
+    <body style="background-color:#bebebe" > 
+      <br></br>
+      <br></br>
+      <br></br>
+      <div class="container">
+         <form method="POST" class="post-form" action="{{qs.id}}">  
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-12">
+              <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+              </svg>
+                
+             
+             
+              {% if ghi == 1 %} 
+
+
+              <div class="alert alert-info d-flex align-items-center" role="alert" >
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" style="height:30px; width:10%"><use xlink:href="#exclamation-triangle-fill"></svg>
+                Carton Box  Scanned Successfully
+              </div>
+            </div>
+          </div>
+          {% elif ghi == 0 %}
+          <div class="alert alert-danger d-flex align-items-center" role="alert" >
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" style="height:30px; width:10%"><use xlink:href="#exclamation-triangle-fill"></svg>
+            Serial Number Mismatch.Please Scan The Exact Carton Box 
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="alert alert-info d-flex align-items-center" role="alert" >
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" style="height:30px; width:10%"><use xlink:href="#exclamation-triangle-fill"></svg>
+          If You Are Clicking The Scan Button Once ,It Will Wait For The Cartonbox To Scan.
+      </div>
+    </div>
+  </div>
+
+      {% endif %}    
+          <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#dcdcdc">
+            <div class="row">
+              <div classname="col-12">
+                <h1 ><font face="times new roman" ><center>Rework</center></font></h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9">
+                {% if updatestatus == 1 %} 
+                  <div class="alert alert-success d-flex align-items-center" role="alert" style="width:100%;">
+                    <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg>
+                    Status Updated Successfully.
+                  </div>
+                {% endif %}  
+              </div>
+              <div class="col-3">
+                  {% comment %} {% if qs.return_slno_btn_response == 0 and  sd != 1 %} {% endcomment %}
+                    <a href="{%url 'scannerlist' %}" class="btn btn-info" style= "color:black;" >Back To Scanner List</a> 
+                      
+                  {% comment %} {% endif %}  {% endcomment %}
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+               
+              <div class="col-3">   
+                  <h5 >SerialNumbers</h5>  
+                  <br></br>
+                  <h5 >Scanned Text</h5> 
+                  <br></br> 
+              </div>
+              <div class="col-3">
+                  <input type="text" readOnly="true" style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{ qs.serialnumber }}" />
+                  <br></br>
+                  <input type="text"  style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{decodedtext}}" />
+                  <br></br> 
+              </div>
+              <div class="col-3">
+                  <h5 >Gtin</h5> 
+                  <br></br>
+                  <h5 >Old Grade</h5>
+                  <br></br> 
+              </div>
+              
+              <div class="col-3">
+                  <input  type="text" readOnly="true" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin}}" />  
+                  <br></br>
+                  
+                  <input type="text" readOnly="true" style="width:80%;height:50px"   name="grade"  required maxlength="15" value="{{ qs.gradevalue }}" />   
+                  <br></br>    
+              </div>  
+            </div>
+           
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                  <a href="{%url 'reworkscan' qs.id %}" class="btn btn-success"  style= "color:black;"; >Scan</a> 
+                  
+                    <br></br>
+              </div> 
+              <div class="col-4"> </div>
+           </div>
+          
+        </form>
+
+
+
+        <div class="row">
+          <form action="{%url 'reworkupdate' qs.id %}" method="get" class="d-flex">       
+          <div class="col-3">   
+              <h5 >New Grade</h5>  
+              <br></br>
+          </div> 
+          <div class="col-3">
+            <input type="text" readOnly="true" style="width:80%;height:50px"   name="grade"  required maxlength="15" value="{{ grade }}" />  
+            <br></br> 
+          </div>
+          <div class="col-3">   
+            <h5 >New Status</h5>  
+            <br></br>
+        </div> 
+        <div class="col-3">
+          <select class="form-control" aria-label="Default select example" name="query" value="{{qs.status}}">
+            <option value="">Select</option>
+            <option value="challenged">Challenged</option>
+            <option value="damaged">Damaged</option>
+            <option value="specimen">Specimen</option>
+            <option value="sample">Sample</option>
+            <option value="others">Others</option>
+          </select>
+          <br></br> 
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            {% if ghi == 1 %}
+        <button type="submit"  class="btn btn-primary" >Update Status</button> 
+      {% endif %}
+            
+              <br></br>
+        </div> 
+        <div class="col-4"> </div>
+     </div>
+
+    </form>
+        </div>
+        
+        <br/> 
+       
+      </body>  
+</html>  
+
+
+               
+
+
+
+
+  
