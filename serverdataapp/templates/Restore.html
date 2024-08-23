@@ -1,0 +1,213 @@
+
+{%block body_block%}
+
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %} 
+     {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
+      <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">   
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
+    <script type="text/javascript"> 
+      window.history.forward(); 
+      function noBack() { 
+          window.history.forward();
+      } 
+    </script> 
+ 
+  </head> 
+  <body style="background: linear-gradient(90deg, rgba(18,48,54,1) 1%, rgba(0,5,6,1) 21%, rgba(40,69,96,1) 49%, rgba(2,34,28,1) 91%);">
+  <nav class="navbar  border-bottom border-body" style="background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(17,39,48,1) 51%, rgba(0,0,0,1) 100%);" data-bs-theme="white" >
+    <div class="container">
+      <h2 class="title">
+        <span class="title-word title-word-1">TRACK</span>
+        <span class="title-word title-word-2">AND</span>
+        <span class="title-word title-word-3">TRACE</span>
+        
+      </h2>
+      {% comment %} <font face="times new roman" size="5" style="color:white"> Welcome {{name}}</font> {% endcomment %}
+      <font face="times new roman" size="5" style="color:#ffd700" class='flipY'>  Welcome {{name}}</font>
+
+      
+    </div>
+
+    
+   
+     
+ 
+     
+      
+     
+    
+   
+    </div>
+   
+   
+  </nav>
+  <br/>
+
+  <div class="row">
+    <div class="col-2"> </div>
+    <div class="col-2"> 
+      <a href="{%url 'dashboard2' %}" class="btn btn-primary" style= "color:white;" >Back To DashBoard</a>&nbsp;&nbsp;&nbsp;&nbsp;  
+      
+    </div>
+    <div class="col-4"> <center> <font class="animate-charcter"  face="times new roman" size="2">RESTORE</font></center> </div>
+    <div class="col-4">
+  
+     
+    </div>
+   
+  </div>
+  <div class="row">
+   
+    <div class="col-4"> 
+    </div>
+    <div class="col-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      {% if success_message  == 1 %}
+      <div class="alert alert-success d-flex align-items-center" role="alert" style="width:100%;">
+        <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%;" >  <use xlink:href="#check-circle-fill"/></svg>
+        Datas Restored To Server Successfully.
+          
+      </div>
+       {% endif %} 
+    </div>
+      <div class="col-4"> 
+      </div>
+  
+    </div>
+
+  <br/>
+  {% if nu == 1 %}
+  <center> <font  face="times new roman" size="4" style="color:white">No Data Available In This List</font></center>
+  {% elif ip_error == 1 %}
+  <center ><div class="alert alert-danger" role="alert" style="width:30%;height:70px;"> 
+                 
+    <center ><img src="{% static 'css/error.gif' %}" >&nbsp;&nbsp;Ip {{ip}} Not Found In Server</img></center>
+   </div></center>
+  {% endif %}
+ 
+</div> 
+
+
+  
+</div>
+<br/> 
+<div class="row">
+    <div class="col-3">
+                                     
+    </div>
+    <div class="col-6">
+        <form action="{%url 'restore_scannerdata'  %}" method="get" class="d-flex"  > 
+              <div class="col-2"></div>    
+              <div class="col-3">
+                <input class="form-control me-2" type="text" name="query" placeholder="Enter Lot Number" aria-label="Search" value={{lot}}>
+              </div> 
+              <div class="col-2"></div>                                 
+              <div class="col-3">
+                <input class="form-control me-2" type="date" name="datequery" placeholder="Enter  date" aria-label="Search" value={{date}} >
+
+              </div> 
+            
+              <div class="col-2"> 
+                                                            {% comment %} <input class="form-control me-2" type="date" name="datequery" placeholder="Enter  date" aria-label="Search" > {% endcomment %}
+              </div> 
+          </div>
+                                                           
+                                                           
+                                                           
+          <div class="col-12">
+              <br/>
+              <center><button class="btn btn-success" type="submit">Search</button></center>
+          </div> 
+          </div>
+                                                                             
+        </form>  
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <br/>
+    <div class="row">
+                 
+      <div class="col-12">
+        <center> <div class="card text- mb-6" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+          <div class="card-header" >
+            <b><font size="4"><center style="color:violet">Available Data Count</center></font></b>
+                                                            
+            <h5 class="card-title">{{count}}</h5>
+                                                            
+          </div>
+          </div></center>
+
+      </div>
+      <br/>
+      <div class="row"> 
+        <div class="col-3"></div>
+        <div class="col-3">
+
+          <form action="{%url 'csv'  %}" method="get" class="d-flex"  >                     
+                                         
+          </br/></br/>
+                 
+          <input class="form-control me-2" type="hidden"  name="query" placeholder="Enter Lot Number" aria-label="Search" value={{lot}}>
+          <input class="form-control me-2" type="hidden" name="datequery" placeholder="Enter  date" aria-label="Search" value={{date}} >
+                  {% comment %} <div class="col-3"><input class="form-control me-2" type="date" name="timequery" placeholder="Enter  date" aria-label="Search"  ></div> {% endcomment %}
+                  
+                
+
+          <div class="col-12">
+          </br/></br/>
+            <center> 
+                  {% comment %} <button class="btn btn-success" type="submit">Restore To Server</button>&nbsp;&nbsp;&nbsp;&nbsp; {% endcomment %}
+              <button class="btn btn-success" type="submit">Download As Csv</button></div></center>                                          
+        </form>   
+        </div>
+        <div class="col-3">
+          <form action="{%url 'restore_server'  %}" method="get" class="d-flex"  >                     
+                                         
+          </br/></br/>
+                 
+          <input class="form-control me-2" type="hidden"  name="query" placeholder="Enter Lot Number" aria-label="Search" value={{lot}}>
+          <input class="form-control me-2" type="hidden" name="datequery" placeholder="Enter  date" aria-label="Search" value={{date}} >
+                  {% comment %} <div class="col-3"><input class="form-control me-2" type="date" name="timequery" placeholder="Enter  date" aria-label="Search"  ></div> {% endcomment %}
+                  
+                
+
+          <div class="col-12">
+          </br/></br/>
+          
+
+            <center> 
+                  {% comment %} <button class="btn btn-success" type="submit">Restore To Server</button>&nbsp;&nbsp;&nbsp;&nbsp; {% endcomment %}
+                  <center> <button class="btn btn-success" type="submit">Restore To Server</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </form>   
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+
+
+
+
+
+ 
+</div> 
+
+
+
+</body>
+
+{% endblock %}

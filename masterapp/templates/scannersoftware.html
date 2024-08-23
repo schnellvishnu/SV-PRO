@@ -5,12 +5,15 @@
         <title>Index</title>  
         {% load static %} 
         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-        <link
+        {% comment %} <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           crossorigin="anonymous"
-        /> 
+        />  {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
         <script type="text/javascript"> 
           window.history.forward(); 
           function noBack() { 
@@ -18,7 +21,7 @@
           } 
         </script> 
     </head>   
-    <body style="background-color:#bebebe" > 
+    <body style="background: linear-gradient(90deg, rgba(3,19,24,1) 21%, rgba(0,3,2,0.9570203081232493) 51%, rgba(2,42,50,1) 100%);"  > 
       <br></br>
       <br></br>
       <br></br>

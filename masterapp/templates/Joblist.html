@@ -7,12 +7,15 @@
     {% load static %} 
      {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
       <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">   
-    <link
+    {% comment %} <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
-    />  
+    />   {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
     <script type="text/javascript"> 
       window.history.forward(); 
       function noBack() { 
@@ -24,8 +27,8 @@
   </script>
  
   </head> 
-  
-  <nav class="navbar bg- border-bottom border-body" data-bs-theme="white" style="background-color:#504A4B" >
+  <body style="background: linear-gradient(90deg, rgba(18,48,54,1) 1%, rgba(0,5,6,1) 21%, rgba(40,69,96,1) 49%, rgba(2,34,28,1) 91%);">
+  <nav class="navbar bg- border-bottom border-body" data-bs-theme="white" style="background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(17,39,48,1) 51%, rgba(0,0,0,1) 100%);" >
     
     <div class="container">
       <h2 class="title">
@@ -78,8 +81,11 @@
   <br/>
 
   <div class="row">
-    <div class="col-9"> 
+    <div class="col-3"> 
       &nbsp;&nbsp;&nbsp;<a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>    
+    </div>
+    <div class="col-6"> 
+      <center> <font class="animate-charcter"  face="times new roman" size="2">Job List</font></center>
     </div>
     <div class="col-3">
       {% if search == 1 %}
@@ -93,15 +99,22 @@
     <div class="col-1">      
     </div>
   </div>
-  <center> <font class="animate-charcter"  face="times new roman" size="2">Job List</font></center>
+  
   <br/>
   {% if nu == 1 %}
-  <center> <font  face="times new roman" size="4">No Jobs Available In This List</font></center>
+  <center> <font  face="times new roman" size="4" style="color:white">No Jobs Available In This List</font></center>
+  {% elif ip_error == 1 %}
+
+  <center ><div class="alert alert-danger" role="alert" style="width:30%;height:70px;"> 
+                 
+    <center ><img src="{% static 'css/error.gif' %}" >&nbsp;&nbsp;<font face="times new roman" size="4">Ip {{ip}} Not Found In Server</font></img></center>
+   </div></center>
+  {% comment %} <center> <font  face="times new roman" size="4" style="color:white">Ip {{ip}} Not Found In Server</font></center> {% endcomment %}
   {% endif %}
   <div class="container-fluid">
   <div class="row" >
   <div class="table-responsive text-nowrap">      
-  <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px; background-color:#666362;" >
+  <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px; background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(17,39,48,1) 51%, rgba(0,0,0,1) 100%);" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <thead >
       <tr>
@@ -134,14 +147,14 @@
         <td colspan="4">
           {% if job.status == "Closed" %}
           
-<a href="{%url 'emp-editjob' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Batch  Closed </pre> </a>
+<a href="{%url 'load' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Batch  Closed </pre> </a>
           {% elif job.status == "Printing Finished" %}
-          <a href="{%url 'emp-editjob' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Printing Finished </pre> </a>
+          <a href="{%url 'load' job.id%}" class="btn btn-danger m-1" data-role="disabled" style="pointer-events: none; height:40px";"cursor: default";><pre>  Printing Finished </pre> </a>
            {% elif job.responsefield == 1 %}
-          <a href="{%url 'emp-editjob' job.id%}" class="btn btn-warning m-1"  ><pre>  Check Autovision & Load Job </pre> </a>  
+          <a href="{%url 'load' job.id%}" class="btn btn-warning m-1"  ><pre>  Check Autovision & Load Job </pre> </a>  
            {% else %}  
            
-             <a href="{%url 'emp-editjob' job.id%}" onClick="window.location.reload();" data-role="disabled"  class="btn btn-success m-1">Check Autovision & Load Job</a>  
+             <a href="{%url 'load' job.id%}" onClick="window.location.reload();" data-role="disabled"  class="btn btn-success m-1">Check Autovision & Load Job</a>  
 
          
           {% endif %}  
@@ -162,17 +175,17 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination" >
           {% if page_obj.has_previous %} 
-          <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
+          <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'tasklist' %}?page={{page_obj.previous_page_number}}">Previous Page</a></li> 
            {% endif %}
           <li class="page-item"><a class="page-link" style="color:red;" href="#">{{page_obj.number}}</a></li>
           {% if page_obj.has_next %} 
-         <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'indexpage' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
+         <li class="page-item"><a class="page-link" style="color:red;" href="{%url 'tasklist' %}?page={{page_obj.next_page_number}}">Next Page</a></li>
          {% endif %}
         </ul>
       </nav>
     </center>
   </div>
 </div>
-
+</body>
 
 {% endblock %}

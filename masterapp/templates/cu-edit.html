@@ -5,12 +5,15 @@
         <title>Index</title>  
         {% load static %} 
         <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}"/>
-        <link
+        {% comment %} <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           crossorigin="anonymous"
-        /> 
+        />  {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
        {% comment %} <script type="text/javascript"> 
           window.history.forward(); 
           function noBack() { 
@@ -22,6 +25,7 @@
           var text = document.getElementById("textField");
           text.style.display = "block";
           document.getElementById("backtolistbtn").style.visibility = "hidden";
+          document.getElementById("loadbutton").style.visibility = "hidden";
           
         
         }
@@ -29,8 +33,10 @@
         function displayStopText() {
           var text = document.getElementById("stoptextField");
           text.style.display = "block";
+          document.getElementById("stopbutton").style.visibility = "hidden";
           document.getElementById("backtolistbtn").style.visibility = "hidden";
           document.getElementById("navigateprintpage").style.visibility = "hidden";
+          
         }
 
         function displayLinkText() {
@@ -39,18 +45,22 @@
          
         }
 
+       
+
+
         const el = document.getElementById('back to dsahboard button');
        </script>
-        
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     </head>   
-    <body style="background-color:#bebebe" > 
+    <body style="background: linear-gradient(90deg, rgba(3,19,24,1) 21%, rgba(0,3,2,0.9570203081232493) 51%, rgba(2,42,50,1) 100%);" > 
       <br></br>
       <br></br>
       <br></br>
-      <div class="container">
-        <form method="POST" class="post-form" action="{{qs.id}}"> 
+     
+      <div class="container" >
+        <form method="POST" class="post-form" action="{{qs.id}}" > 
           {% csrf_token %}
-          <div class="row">
+          <div class="row" >
             <div class="col-12">
               <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
                 <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -58,7 +68,18 @@
                 </symbol>
               </svg>
               <div id="textField" class="btn btn-" style="display: none; background-color:#F0E68C">
-                Please Wait......Request For Loading The  Process Have Been Executing....
+                Please Wait......Request For Loading The  Process Have Been Executing
+                <div class="spinner-grow text-primary" role="status">
+                  <span class="spinner-grow spinner-grow-sm" role="status"  aria-hidden="true"></span>
+                  <span class="visually-hidden">Loading...</span>
+
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                </div>
               </div>
               <div id="stoptextField" class="btn" style="display: none; background-color:#FFDAB9">
                 Please Wait.....Request For Stopping The Process Have Been Executing.....              </div>
@@ -67,14 +88,14 @@
             Please Wait.....Request For Navigating To Printer Page Have Been Executing.....              </div>
       </div>
         <br></br>
-          <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background-color:#dcdcdc">
+          <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%);">
             <div class="row">
               <div classname="col-12">
                 <center> <font class="animate-charcter"  face="times new roman" size="2">BATCH DETAILS</font></center>
               </div>
             </div>
             <div class="row">
-              <div class="col-9">
+              <div class="col-6">
                   {% if errormess == "cartridge_expired (12)"  %}
                     <div class="alert alert-primary"  role="alert" style="width:100%;" >
                       Printer Cartridge Expired
@@ -87,146 +108,147 @@
                     <a href="{%url 'tasklist' %}"  class="btn btn-info" id="backtolistbtn" style= "color:black;" >Back To Job List</a>      
                   {% endif %} 
               </div>  {% endcomment %}
-              <div class="col-3" >
+              {% comment %} <div class="col-1" > {% endcomment %}
                
-                  <a href="{%url 'dashboard' %}"  class="btn btn-info" id="backtolistbtn" style= "color:black;" >Back To Dashboard</a>      
+                {% comment %} <a href="{%url 'dashboard' %}"  class="btn btn-info" id="backtolistbtn" style= "color:black;" >Back To Dashboard</a>       {% endcomment %}
+             
+          {% comment %} </div> {% endcomment %}
+              <div class="col-6" >
+               
+                  <a href="{%url 'dashboard' %}"  class="btn btn-info" id="backtolistbtn" style= "color:black;" >Back To Dashboard</a>    
                
             </div> 
            
             </div>
             <br/>
-            <div class="row">
-                <br></br>
-              <div class="col-3">  
-                  <h5>Lot</h5>
-                  <br></br>
-                  <h5 >Serial Numbers</h5>  
-                  <br></br>
-                  <h5>Expiry Date</h5> 
-                  <br></br> 
+            <div class="container text-center">
+              <div class="row row-cols-3">
+                <div class="col"><div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                  <div class="card-header"  >
+                <b><font size="4"><center style="color:yellow" >Batch Number</center></font></b>
+                    <h5 class="card-title">{{qs.lot }}</h5>
+                  </div>
+                </div>
               </div>
-              <div class="col-3">
-                  <input type="text" readOnly="true" style="width:80%;height:50px"   name="eid" id="id_eid" required maxlength="50" value="{{ qs.lot }}"/> 
-                  <br></br>
-                  <input type="text" readOnly="true" style="width:80%;height:50px"  name="ename" id="id_ename" required maxlength="100" value="{{ qs.numbers }}" />
-                  <br></br>
-                  <input type="text" readOnly="true"  style="width:80%;height:50px" name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.expiration_date}}" /> 
-                  <br></br> 
-              </div>
-              <div class="col-3">
-                  <h5 >Gtin</h5> 
-                  <br></br>
-                  <h5 >Processorder Number</h5>   
-                  <br></br>
-                  <h5 >Type</h5>
-                  <br></br> 
-              </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Po Number</center></font></b>
+                      <h5 class="card-title">{{qs.processordernumber }}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">GTIN</center></font></b>
+                      <h5 class="card-title">{{qs.gtin }}</h5>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Expiration Date</center></font></b>
+                      <h5 class="card-title">{{qs.expiration_date }}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Type</center></font></b>
+                      <h5 class="card-title">{{ qs.type }}</h5>
+                    </div>
+                  </div>
+                </div>
               
-              <div class="col-3">
-                  <input  type="text" readOnly="true" style="width:80%;height:50px"  name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.gtin}}" />  
-                  <br></br>
-                  <input type="text" readOnly="true" style="width:80%;height:50px"   name="eemail" id="id_eemail" required maxlength="254" value="{{ po }}" /> 
-                  <br></br>
-                  <input type="text" readOnly="true" style="width:80%;height:50px"   name="econtact" id="id_econtact" required maxlength="15" value="{{ qs.type }}" />   
-                  <br></br>    
-              </div>  
+                <div class="col">
+                
+
+                <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                  <div class="card-header" >
+                    <b><font size="4"><center style="color:yellow">Status</center></font></b>
+                    <h5>{{ qs.status }}</h5>
+                  </div>
+                </div>
+             
+              
             </div>
+          </div>
+          </br>
             <div class="row">
               <div class="col-4">
-                {% if alert == 0 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
+               
+                {% if loadpausealert == 1 %}
+                <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
+                  {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
                    
-                   <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp; Scanner Connection Losted!Check The Connection And Try Again.</img>
-                      
-                  </div>
+                    <img src="{% static 'css/warning.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;  Please Pause The Printer</img>        
+                </div>
 
-                  {% elif alert == 1 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                    
-                     <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;  Printer Connection Losted!Check The Connection And Try Again.</img> 
-                  </div>
-
-                  {% elif alert == 3 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                    Unfortunately Lost The Printer Connection In Between The Process.For Restarting It Again, Stop The Currently Running Process And Start It Again.
-                      
-                  </div>
-
-                  {% elif alert == 4 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                    {% comment %} Can't Navigate To Run Page It Needed To Printer Connction.Check The Connection And Try Again. {% endcomment %}
-                    <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;Can't Navigate To Run Page It Needed To &nbsp; Printer Connction.Check The Connection And Try Again.</img>
-                  </div>
-
-                  {% elif alert == 5 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                   
-                    <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp; Can't  Receive The Request  It Needed To Printer Connction.Check The Connection And Try Again.</img>  
-                  </div>
-
-                  {% elif alert == 6 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                  
-                    <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;  Can't  Pause Job  It Needed To Printer Connction.Check The Connection And Try Again.</img>   
-                  </div>
-
-                  {% elif alert == 7 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                 
-                   <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;   Scanner Connection Losted. Can't  Run Job Page It Needed To Scanner Connction.Check The Connection And Try Again.</img>     
-                  </div>
-
-                  {% elif alert == 8 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                    
-                    <img src="{% static 'css/error.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;  Can't Navigate To Run Page It Needed To Scanner Connction.Check The Connection And Try Again.</img>      
-                  </div>
-
-                  {% elif loadpausealert == 1 %}
-                  <div class="alert alert-danger d-flex align-items-center" role="alert" style="width:100%;">
-                    {% comment %} <svg class="bi flex-shrink-0 me-0" role="img" p-"5" aria-label="Success:" style="height:30px; width:10%" >  <use xlink:href="#check-circle-fill"/></svg> {% endcomment %}
-                     
-                      <img src="{% static 'css/warning.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;&nbsp;  Please Pause The Printer</img>        
-                  </div>
-
-                  {% endif %}
-                <br></br>
-              </div>
-              {% comment %} {% if loadpausealert == "1"  %}
-              <div class="alert alert-primary"  role="alert" style="width:100%;" >
-                Please Pause The Printer
-              </div>  {% endcomment %}
-            {% comment %} {% endif %}  {% endcomment %}
-            {% if buttonstatus != 0%}
-              <div class="col-4">
-                {% if qs.responsefield == 1 or  sd == 1 %}
-                  <button type="submit"  class="btn btn-danger" onclick="displayStopText()" >Stop Batch</button> 
-                {% elif qs.responsefield == 0 %}
-                  <button type="submit"   class="btn btn-primary" onclick="displayText()" >Load Batch</button> 
                 {% endif %}
+                 
+              </div>
+       
+            {% comment %} {% if buttonstatus != 0%} {% endcomment %}
+              <div class="col-4">
+                {% if qs.load_button_resp == 1 or  loadstopvariable == 1 %}
+                   <button type="submit"  class="btn btn-danger" id="stopbutton" onclick="displayStopText()" >Stop Batch</button>  
+                {% elif qs.load_button_resp == 0 %}
+                  <button type="submit"   class="btn btn-primary" id="loadbutton" onclick="displayText()" >Load Batch</button>
+
+                {% endif %}
+                
                 <br></br>
               </div>
-              {% endif %}
+              {% comment %} {% endif %} {% endcomment %}
               <div class="col-4">
-                {% if sd == 1 and alert == 2 %} 
-                  <a   href="{%url 'pause-printer' qs.id%}"  id= "navigateprintpage" style= "color:blue" onclick="displayLinkText()" >Click Here To Start the Printing Activities</a> 
+                {% if loadstopvariable == 1 or load_button_resp == 1 %} 
+                  <a   href="{%url 'start' qs.id%}"  id= "navigateprintpage" style= "color:orange" onclick="displayLinkText()" >Click Here To Start the Printing Activities</a> 
                  
                 {% endif %}
                 <br></br>
               </div>
             </div>
 
+             <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+          
+            <script>
+          
+              $.ajax({
+               
+                url:"{%url 'cu-connection-issue' qs.id%}",
+                
+                success: function(data) {
+                    $('#cu-connection-id').html(data);
+                }
+            });
+        </script> 
+       
+  
+      
+         
           </div> 
+ 
+     
         </form>
-      </div>   
+       
+      </div> 
+      <br/>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div id="cu-connection-id">
+        
+          </div> 
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+     
     </body>  
     
 </html>  

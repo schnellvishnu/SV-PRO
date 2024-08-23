@@ -4,10 +4,9 @@ from django.urls import path
 urlpatterns = [
     
     
-#      path("autovisionopen/<int:id>",views.Autovisionopenview.as_view(),name="autovision"), 
-#      path('sendserver/', views.sendServer, name='sendserver'),
-      # path('jobaddedsuccess/<int:id>', views.LoadJobpageview.as_view(), name='jobaddedsuccess'), 
-#       path('sendserver/',views.sendServer, name='sendserver'),         
+ path('restore_scannerdata/', views.Restore_BackupdataView, name='restore_scannerdata'), 
+  path('csv/', views.Export_csv, name='csv'),  
+  path('restore_server/', views.Restoredata_to_server, name='restore_server'),           
 ]     
   
 

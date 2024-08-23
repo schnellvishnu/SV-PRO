@@ -3,18 +3,21 @@
     <head>  
       <meta charset="UTF-8">  
       <title>Index</title>  
-      {% load static %} 
-      <link rel="stylesheet" href="{% static 'css/information.css' %}"/>
-      <link
+   {% load static %}  
+     <link rel="stylesheet" href="{% static 'css/information.css' %}"/>
+      {% comment %} <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
         crossorigin="anonymous"
-      /> 
-    
+      />   {% endcomment %}
       <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
     </head>  
-    <body > 
+    <body> 
      
       <div class="row">
       
@@ -22,7 +25,7 @@
          
      
          
-          <img src="{% static 'css/m610oemimg.jpeg' %}"  style="width:100%;height:500px"></img>
+         <img src="{% static 'css/m610oemimg.jpeg' %}"  style="width:100%;height:500px"></img>  
         
 
         
@@ -55,13 +58,13 @@ matter (ink, water etc.)
 
 
           <br/>
-          <center> <a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To Dashboard</a></center>
+          <center> <a href="{%url 'dashboard2' %}" class="btn btn-info" style= "color:black;" >Back To Dashboard</a></center>
           
           
 </span></div>
         <div class="col-4" style="background-color:gray">
           
-          <img src="{% static 'css/omronscanner.jpeg' %}"  style="width:100%;height:500px"></img>
+          {% comment %} <img src="{% static 'css/omronscanner.jpeg' %}"  style="width:100%;height:500px"></img>  {% endcomment %}
           F440-F Smart Cameras are designed for reliable vision performance in identification and inspection 
           applications. The compact size and wide variety of optics and illumination options available provide the 
           best performance for virtually any machine vision application.

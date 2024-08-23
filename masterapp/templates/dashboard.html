@@ -9,172 +9,158 @@
                   <meta name="viewport" content="width=device-width, initial-scale=1">
                     <link rel="stylesheet" href="">
                                        
-                    <link
+                    {% comment %} <link
                           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
                                 rel="stylesheet"
                           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
                           crossorigin="anonymous"
-                    />  
-                </head> 
-                <br/><br/><br/>
-                <body style="background-color:#52595D">
-                 
-                  <div class="container" >
-                    {% comment %} <video width="320" height="240" autoplay loop >
-                      <source src="{% static 'css/yellow.mp4' %}" type="video/mp4">
-                      
-                    </video> {% endcomment %}
-                    <br/><br/> 
-                    <div class="loading">
-                      <div class="container text-center" >
-                        <br/><br/><br/><br/>
-                       
-
+                    />   {% endcomment %}
+                    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
        
-                        <div class="row" >
-                          
+                <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
+                </head> 
+                <br/><br/><br/><br/><br/><br/><br/>
+                <body style="background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%);" >
+                 
+                  <div class="container text-center"  >
+                    <div class="row justify-content-md-center">
+                      <div class="col col-lg-2">
+                        <a href="{%url 'indexpage' %}">                       
+                          <button type="submit"    style="width:80%;height:150px;background:#66cdaa;border: 6px solid #7fffd4;" ><img src="{% static 'css/add2.gif' %}"  > </img> <br/>Job Management</button>                  
+                          </a>
+                      </div>
+                      {% if loadbutton == 1 %}
+                      <div class="col col-lg-2" >
+                        <button type="submit" disabled=true  style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;" ><img src="{% static 'css/dots.gif' %}"  style="width:35%;height:60px"></img><br/>One Job Is Loaded</button>
+                      </button>   
+                      </div>
+                      {% else %}
+                      <div class="col col-lg-2">
+                        <a href="{%url 'tasklist' %}">
+                          <button type="submit" style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;"><img src="{% static 'css/listjob.gif' %}"  style="width:35%;height:60px"></img><br/>List Job</button>
+                        </a> 
+                      </div>
+                      {% endif %}
 
-                                            <div class="col-3">
-                                              <a href="{%url 'indexpage' %}">                       
-                                              <button type="submit"    style="width:100%;height:180px;background:#E8E4C9 ;border-radius: 45px;" ><img src="{% static 'css/add2.gif' %}"  style="width:15%;height:50px;">&nbsp;&nbsp;Job Management</img></button> 
-                                            </a>
-                                            </div>
-                                            {% if resf == 1 %}
-                                            <div class="col-3">
-
-                                            
-
-                                                {% comment %} <button type="submit"   style="width:100%;height:180px;background:orange;border-radius: 45px;" >&nbsp;&nbsp;One Job Is Loaded... {% endcomment %}
-                                                  <button type="submit" disabled=true  style="width:100%;height:180px;background:orange;border-radius: 45px;" >&nbsp;&nbsp;One Job Is Loaded&nbsp;&nbsp;<img src="{% static 'css/dots.gif' %}"  style="width:10%;height:25px"></img></button>
-                                                </button>
-                        
-                                             
-                                              
-                                            </div>
-                                            {% else %}
-
-                                            <div class="col-3">
-
-                                              <a href="{%url 'tasklist' %}"> 
-
-                                                <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/listjob.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;List Job</img></button>
-                        
-                                              </a>
-                                              
-                                            </div>
-                                            {% endif %}
-                                           
-                                               {% if id == 0 or resf == 0 %}
-
-                                            <div class="col-3">
-                                              
-                                                <button type="submit" disabled=true  style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" >  &nbsp;&nbsp;Run Job</button>
-                                             
-                                            </div>
-                                            {% else %}
-                                            <div class="col-3">
-                                              <a  href="{%url 'pause-printer' id %}">  
-                                                <button type="submit"   style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/start.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Run Job</img></button>
-                                              </a>
-                                            </div>
-                                            {% endif %}
-
-                                            {% if id == 0 or resf == 0  %}
-                                            <div class="col-3">
-                                             
-                                             
-                                         
-                                            
-                                               <button type="submit" disabled=true  style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" >&nbsp;&nbsp;Stop Job</button>                   
-                                              
-                                             
-                                             </div>
-                                            {% else %}
-                                            <div class="col-3">
-                                             
-                                             
-                                         
-                                             <a href="{%url 'emp-editjob' id %}"> 
-                                              <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/stop.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Stop Job</img></button>                   
-                                             
-                                            </a>
-                                            </div>
-                                               {% endif %} 
-                                            
-                        </div>
-                        <br/><br/>
-
-                        <div class="row">
-                         
-                                            <div class="col-3">
-                                              <a href="{% url 'scannerlist' %}">    
-                                                <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/scanner.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Rework</img></button>
-                                              </a>
-                                            </div>
-                                            {% if resf == 1 %}
-                                            <div class="col-3">
-                                                                   
-                                                <button type="submit" disabled=true  style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/upload.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Return Serial Numbers</img></button>
-                                            </a>
-                                              
-                                              
-                                            </div>
-                                            {% else %}
-                                            <div class="col-3">
-                                              <a href="{%url 'return-list' %}">                       
-                                                <button type="submit"   style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/upload.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Return Serial Numbers</img></button>
-                                            </a>
-                                              
-                                              
-                                            </div>
-                                            {% endif %}
-                                            <div class="col-3">
-                                              <a href="{%url 'reportget' %}" >
-                                                <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/report.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Reports</img></button> 
-                                              </a>
-                                            </div>
-                                            <div class="col-3">
-                                              <a href="{%url 'serverdatalist' %}">                       
-                                                <button type="submit"   style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/server2.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Server</img></button>
-                                            </a>
-                                            </div>
-                        </div>
-                       
-
-                        <br/><br/>
-                        <div class="row">
-                          <div class="col-3">
-                            <a href="{%url 'information' %}">  
-                             <button type="submit"   style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/info.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Information</img></button>
-                            </a>
-                          </div>
-                          <div class="col-3">
-                            <a href="{%url 'history' %}">  
-                              <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/history.gif' %}"  style="width:15%;height:50px">&nbsp;&nbsp;History</img></button></a>                 
-                                             
-                            </a>
-                           
-                           
-                          </div>
-                          <div class="col-3">
-                            <a href="{%url 'about' %}">  
-                            <button type="submit"   style="width:100%;height:180px;background:#E8E4C9;border-radius: 45px;" ><img src="{% static 'css/about.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;About</img></button>              
-                           
+                      {% if id == 0 or loadbutton == 0 or close_variable == "1"  %} 
+                      <div class="col col-lg-2">
+                        <a  href="{%url 'start' id %}">  
+                          <button type="submit" disabled=true style="width:80%;height:150px;background:#66cdaa;border: 6px solid 	#7fffd4;"></br>Run Job</button>
                         </a>
-                          </div>
-                          <div class="col-3">
-                            <a   href="{%url 'signout'%}">  
-                              <button type="submit"   style="width:100%;height:180px;background:#7C9D8E;border-radius: 45px;" ><img src="{% static 'css/logout.png' %}"  style="width:15%;height:50px">&nbsp;&nbsp;Logout</img></button>
-                            </a>
-                          </div>
-                        </div>
-                       
+                      </div>
+                      {% else %} 
 
-                        <br/><br/>
-                        
-                      </div> 
-    </div>        
+                      <div class="col col-lg-2">
+                        <a  href="{%url 'start' id %}">  
+                          <button type="submit" style="width:80%;height:150px;background:#66cdaa;border: 6px solid 	#7fffd4;"   ><img src="{% static 'css/pause.png' %}"  style="width:35%;height:60px"></img></br>Run Job</button>
+                        </a> 
+                      </div>
+                      {% endif %}
+                      
                     </div>
-                  </div>              
+                 
+                 
+<br/><br/><br/>
+
+                    <div class="row justify-content-md-center">
+                      {% if close_variable == "1" %} 
+                      <div class="col col-lg-2"> 
+                        <button type="submit" disabled=true   style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;" ></br>Pause Job</button> 
+                      </div>
+                      {% elif  startbutton == 1 %} 
+                      <div class="col col-lg-2">
+                        <a  href="{%url 'pauseview' id %}">  
+                          <button type="submit"   style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;" ><img src="{% static 'css/start.png' %}"  style="width:35%;height:60px"></img></br>Pause Job</button>
+                        </a>
+                      </div>
+                     
+                      {% else %}
+                      <div class="col col-lg-2"> 
+                        <button type="submit" disabled=true   style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;" ></br>Pause Job</button> 
+                      </div>
+                      {% endif %}
+
+                      {% if id == 0 or loadbutton == 0  %}
+                      <div class="col col-lg-2">
+                                       <button type="submit" disabled=true  style="width:80%;height:150px;background:#66cdaa;border: 6px solid 	#7fffd4;" >&nbsp;&nbsp;Stop Job</button>          
+                      </button>   
+                      </div>
+                      {% else %}
+                      <div class="col col-lg-2">
+                        <a href="{%url 'stop' id %}"> 
+                          <button type="submit" style="width:80%;height:150px;background:#66cdaa;border: 6px solid 	#7fffd4;"  ><img src="{% static 'css/stop.png' %}"  style="width:35%;height:60px"></img><br/>Stop Job</button>                   
+                         
+                        </a>
+                      </div>
+                      {% endif %}
+
+                      {% if loadbutton == 1 %}
+                      <div class="col col-lg-2">
+                        <a href="{% url 'scannerlist' %}">    
+                          <button type="submit" disabled=true style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;"  ><br/>Rework</button>
+                        </a>
+                      </div>
+
+                      {% else %}
+
+                      <div class="col col-lg-2">
+                        <a href="{% url 'scannerlist' %}">    
+                          <button type="submit" style="width:80%;height:150px;background:#ffefd5;border: 6px solid #e9967a;"  ><img src="{% static 'css/scanner.gif' %}"  style="width:35%;height:60px"></img><br/>Rework</button>
+                        </a>
+                      </div>
+                  
+                      {% endif %}
+                      
+                    </div>
+                  </div>
+                 
+                  <br/><br/>
+                  <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                    <div class="col-4"><a href="{% url 'dashboard2' %}">    
+                      <img src="{% static 'css/next2.png' %}"  ></img>
+                    </a></div>
+                  </div>
+                {% if loadbutton == 1 %}
+
+                  <script type="text/javascript"
+                  src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                
+                   <script>
+                
+                    $.ajax({
+                     
+                      url:"{%url 'common-ajax' id%}",
+                      
+                      success: function(data) {
+                          $('#commonid').html(data);
+                      }
+                  });
+              </script>   
+        
+        
+               
+            
+              
+             
+              
+              </div>
+                </form>
+                
+              </div> 
+              <br/>
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                  <div id="commonid">
+              
+                  </div>
+                </div>
+                <div class="col-3"></div>
+              </div>
+              {% endif %}
+            
+
                 </body>
                 </html>

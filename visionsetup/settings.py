@@ -92,7 +92,7 @@ try:
     DATABASES = {
               
                     'default': {
-                        "NAME": "Line_DB1",
+                        "NAME": "Line_DB2",
                         "ENGINE": 'django.db.backends.postgresql',
                         "USER": "postgres",
                         "PASSWORD": "1234",

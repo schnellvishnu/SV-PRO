@@ -7,12 +7,15 @@
     {% load static %} 
      {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
       <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">   
-    <link
+    {% comment %} <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
-    />  
+    />   {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
     <script type="text/javascript"> 
       window.history.forward(); 
       function noBack() { 
@@ -24,8 +27,8 @@
   </script>
  
   </head> 
-  
-  <nav class="navbar  border-bottom border-body" style="background:#040720" data-bs-theme="white" >
+  <body style="background: linear-gradient(90deg, rgba(18,48,54,1) 1%, rgba(0,5,6,1) 21%, rgba(40,69,96,1) 49%, rgba(2,34,28,1) 91%);">
+  <nav class="navbar  border-bottom border-body" style="background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(17,39,48,1) 51%, rgba(0,0,0,1) 100%);" data-bs-theme="white" >
     
       
    <div class="container">
@@ -61,8 +64,10 @@
   <br/>
 
   <div class="row">
-    <div class="col-9"> 
-      <a href="{%url 'dashboard' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>    
+    <div class="col-1"></div>
+    <div class="col-2"> <a href="{%url 'dashboard2' %}" class="btn btn-info" style= "color:black;" >Back To DashBoard</a>    </div>
+    <div class="col-6"> 
+      <center> <font class="animate-charcter"  face="times new roman" size="2">Return SerialNumbers</font></center>
     </div>
     <div class="col-3">
     {% if search == 1 %}
@@ -73,18 +78,22 @@
      
      
     </div>
-    <div class="col-1">      
-    </div>
+    
   </div>
-  <center> <font class="animate-charcter"  face="times new roman" size="2">Return SerialNumbers</font></center>
+  
   <br/>
   {% if nu == 1 %}
-  <center> <font  face="times new roman" size="4">No Data Available In This List</font></center>
+  <center> <font  face="times new roman" size="4" style="color:white">No Data Available In This List</font></center>
+  {% elif ip_error == 1 %}
+  <center ><div class="alert alert-danger" role="alert" style="width:30%;height:70px;"> 
+                 
+    <center ><img src="{% static 'css/error.gif' %}" >&nbsp;&nbsp;Ip {{ip}} Not Found In Server</img></center>
+   </div></center>
   {% endif %}
   <div class="container-fluid">
   <div class="row" >
   <div class="table-responsive text-nowrap">      
-    <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px;background-color:#040720;" >
+    <table  class="table table- table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px;background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(17,39,48,1) 51%, rgba(0,0,0,1) 100%);" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <thead >
       <tr>
@@ -114,7 +123,7 @@
         <td colspan="4">
          {% if  job.status == "Stopped" or  job.status == "Printing Finished" %}
           
-         <a href="{%url 'return-get' job.id%}" onClick="window.location.reload();"  class="btn btn-success m-1">Return Numbers</a>  
+         <a href="{%url 'return-numbers' job.id job.lot%}" onClick="window.location.reload();"  class="btn btn-success m-1">Return Numbers</a>  
       
            
 
@@ -148,6 +157,6 @@
     </center>
   </div>
 </div>
-
+</body>
 
 {% endblock %}

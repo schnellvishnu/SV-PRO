@@ -7,12 +7,15 @@
     {% load static %} 
      {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  {% endcomment %}
       <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}">   
-    <link
+    {% comment %} <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
-    />  
+    />   {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
     <script type="text/javascript"> 
       window.history.forward(); 
       function noBack() { 
@@ -24,8 +27,8 @@
   </script>
  
   </head> 
-  
-  <nav class="navbar  border-bottom border-body" style="background:#3F000F" data-bs-theme="white" >
+  <body style="background: linear-gradient(90deg, rgba(3,19,24,1) 21%, rgba(0,3,2,0.9570203081232493) 51%, rgba(2,42,50,1) 100%);" >
+  <nav class="navbar  border-bottom border-body" style="background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(13,79,107,1) 51%, rgba(0,0,0,1) 100%);" data-bs-theme="white" >
     
     
    <div class="container">
@@ -40,7 +43,7 @@
 
     <form action="{%url 'historysearch'  %}" method="get" class="d-flex"  >   
       <div class="col-8">
-        <input class="form-control me-2" type="text" name="query" placeholder="Enter Lot Number" aria-label="Search" >
+        <input class="form-control me-2" type="text" name="query" placeholder="Enter Username" aria-label="Search" >
       </div>&nbsp;&nbsp;&nbsp;
       <div class="col-4">
         <button class="btn btn-success" type="submit">Search</button></div> 
@@ -59,16 +62,56 @@
    
    
   </nav>
-  <br/>
 
+  <script type="text/javascript"
+                  src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                
+                   <script>
+                
+                    $.ajax({
+                     
+                      url:"{%url 'common-ajax' id%}",
+                      
+                      success: function(data) {
+                          $('#commonid').html(data);
+                      }
+                  });
+              </script>   
+        
+        
+               
+            
+              
+             
+              
+              </div>
+                </form>
+                
+              </div> 
+           
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                  <div id="commonid">
+              
+                  </div>
+                </div>
+                <div class="col-3"></div>
+              </div>
+              <br/>
   <div class="row">
-    <div class="col-2"> 
+    <div class="col-1"> 
       
     </div>
-    <div class="col-8"> 
-      &nbsp; &nbsp;<a href="{%url 'dashboard' %}" class="btn" style= "color:black;background:#87AFC7" >Back To DashBoard</a>    
+ 
+    <div class="col-2"> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+      <a href="{%url 'dashboard2' %}" class="btn" style= "color:black;background:#87AFC7" >Back To DashBoard</a>    
     </div>
-    <div class="col-2">
+    <div class="col-6"> 
+      <center> <font class="animate-charcter"  face="times new roman" size="2">HISTORY</font></center>
+    </div>
+    <div class="col-3">
       {% if search == 1 %}
       <a href="{%url 'history' %}" class="btn btn-info" style= "color:black;" >Back To History List</a>   
     
@@ -83,21 +126,31 @@
     <div class="col-1">      
     </div>
   </div>
-  <center> <font class="animate-charcter"  face="times new roman" size="2">HISTORY</font></center>
+ 
   <br/>
+  
   {% if nu == 1 %}
-  <center> <font  face="times new roman" size="4">No History Available </font></center>
+  <center> <font  face="times new roman" size="4" style="color:white">No History Available </font></center>
+  {% elif ip_error == 1 %}
+  <center ><div class="alert alert-danger" role="alert" style="width:30%;height:70px;"> 
+                 
+    <center ><img src="{% static 'css/error.gif' %}" >&nbsp;&nbsp;<font face="times new roman" size="6">Ip {{ip}} Not Found In Server</font></img></center>
+   </div></center>
   {% endif %}
+
+  
   <div class="row" >
 
     <div class="col-2"> 
 
     </div> 
+
+
     <div class="col-8"> 
       <div class="container-fluid">
          <div class="row" > 
         <div class="table-responsive text-nowrap">      
-      <table   class="table table-#915791 table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px;background:#3F000F">
+      <table   class="table table-#915791 table-striped  table-hover table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl" style="height:600px;background: linear-gradient(90deg, rgba(11,11,11,1) 21%, rgba(13,79,107,1) 51%, rgba(0,0,0,1) 100%);">
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
           <thead >
             <tr>
@@ -162,6 +215,7 @@
     </center>
   </div>
 </div>
+</body>
 
 
 {% endblock %}

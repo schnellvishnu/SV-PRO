@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+  <html lang="en">  
+    <head>  
+      <meta charset="UTF-8">  
+        <title>Index</title>  
+        {% load static %} 
+        <link rel="stylesheet" href="{% static 'css/trackandtrace2.css' %}"/>
+        {% comment %} <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous"
+        />  {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       
+      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
+       {% comment %} <script type="text/javascript"> 
+          window.history.forward(); 
+          function noBack() { 
+              window.history.forward();
+          } 
+        </script>  style.visibility = "hidden";   {% endcomment %}
+       <script>
+        function displayText() {
+          var text = document.getElementById("textField");
+          text.style.display = "block";
+          document.getElementById("backtolistbtn").style.visibility = "hidden";
+          document.getElementById("loadbutton").style.visibility = "hidden";
+          
+        
+        }
+
+        function displayStopText() {
+          var text = document.getElementById("stoptextField");
+          text.style.display = "block";
+          document.getElementById("stopbutton").style.visibility = "hidden";
+          document.getElementById("backtolistbtn").style.visibility = "hidden";
+          document.getElementById("navigateprintpage").style.visibility = "hidden";
+          
+        }
+
+        function displayLinkText() {
+          var text = document.getElementById("linktextField");
+          text.style.display = "block";
+         
+        }
+
+       
+
+
+        const el = document.getElementById('back to dsahboard button');
+       </script>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    </head>   
+    <body style="background: linear-gradient(90deg, rgba(3,19,24,1) 21%, rgba(0,3,2,0.9570203081232493) 51%, rgba(2,42,50,1) 100%);" > 
+      <br></br>
+      <br></br>
+      <br></br>
+     
+      <div class="container" >
+        <form method="POST" class="post-form" action="{{qs.id}}" > 
+          {% csrf_token %}
+          <div class="row" >
+            <div class="col-12">
+              <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+              </svg>
+              <div id="textField" class="btn btn-" style="display: none; background-color:#F0E68C">
+                Please Wait......Request For Loading The  Process Have Been Executing
+                <div class="spinner-grow text-primary" role="status">
+                 <span class="spinner-grow spinner-grow-sm" role="status"  aria-hidden="true"></span> 
+                  <span class="visually-hidden">Loading...</span>
+
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div id="stoptextField" class="btn" style="display: none; background-color:#FFDAB9">
+                Please Wait.....Request For Stopping The Process Have Been Executing.....              </div>
+          </div>
+          <div id="linktextField" class="btn" style="display: none; background-color:#FFDAB9">
+            Please Wait.....Request For Navigating To Printer Page Have Been Executing.....              </div>
+      </div>
+        <br></br>
+          <div class="container text-center" style="border: 4px solid rgb(51, 74, 72); background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%);">
+            <div class="row">
+              <div classname="col-12">
+                <center> <font class="animate-charcter"  face="times new roman" size="2">BATCH DETAILS</font></center>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                  {% if errormess == "cartridge_expired (12)"  %}
+                    <div class="alert alert-primary"  role="alert" style="width:100%;" >
+                      Printer Cartridge Expired
+                    </div> 
+                  {% endif %} 
+              </div>
+              
+              
+              <div class="col-6" >
+               
+                  <a href="{%url 'dashboard' %}"  class="btn btn-info" id="backtolistbtn" style= "color:black;" >Back To Dashboard</a>    
+               
+            </div> 
+           
+            </div>
+            <br/>
+            <div class="container text-center">
+              <div class="row row-cols-3">
+                <div class="col"><div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                  <div class="card-header"  >
+                <b><font size="4"><center style="color:yellow" >Batch Number</center></font></b>
+                    <h5 class="card-title">{{qs.lot }}</h5>
+                  </div>
+                </div>
+              </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Po Number</center></font></b>
+                      <h5 class="card-title">{{qs.processordernumber }}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">GTIN</center></font></b>
+                      <h5 class="card-title">{{qs.gtin }}</h5>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Expiration Date</center></font></b>
+                      <h5 class="card-title">{{qs.expiration_date }}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                    <div class="card-header" >
+                      <b><font size="4"><center style="color:yellow">Type</center></font></b>
+                      <h5 class="card-title">{{ qs.type }}</h5>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col">
+                
+
+                <div class="card text- mb-3" style="width:50%;color:white;background: linear-gradient(90deg, rgba(4,38,42,1) 3%, rgba(0,0,0,1) 90%, rgba(2,42,50,1) 100%)";>
+                  <div class="card-header" >
+                    <b><font size="4"><center style="color:yellow">Status</center></font></b>
+                    <h5>{{ qs.status }}</h5>
+                  </div>
+                </div>
+             
+              
+            </div>
+          </div>
+          </br>
+            <div class="row">
+              <div class="col-4">
+               
+              
+              </div>
+       
+            {% comment %} {% if buttonstatus != 0%} {% endcomment %}
+              <div class="col-4">
+                {% comment %} {% if qs.load_button_resp == 1 or  loadstopvariable == 1 %} {% endcomment %}
+                 
+                {% comment %} {% elif qs.load_button_resp == 0 %} {% endcomment %}
+                  <button type="submit"   class="btn btn-primary" id="loadbutton" onclick="displayText()" >Load Batch</button>
+
+                {% comment %} {% endif %} {% endcomment %}
+                
+                <br></br>
+              </div>
+              {% comment %} {% endif %} {% endcomment %}
+              <div class="col-4">
+                {% comment %} {% if loadstopvariable == 1 or load_button_resp == 1 %} 
+                  <a   href="{%url 'start' qs.id%}"  id= "navigateprintpage" style= "color:orange" onclick="displayLinkText()" >Click Here To Start the Printing Activities</a> 
+                 
+                {% endif %} {% endcomment %}
+                <br></br>
+              </div>
+            </div>
+
+             <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+          
+            <script>
+          
+              $.ajax({
+               
+                url:"{%url 'cu-connection-issue' qs.id%}",
+                
+                success: function(data) {
+                    $('#cu-connection-id').html(data);
+                }
+            });
+        </script>  
+       
+  
+      
+         
+          </div> 
+ 
+     
+        </form>
+       
+      </div> 
+      <br/>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div id="cu-connection-id">
+        
+          </div> 
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+     
+    </body>  
+    
+</html>  
+
+
+
+
+
+  

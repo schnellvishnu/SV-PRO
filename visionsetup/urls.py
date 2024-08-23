@@ -22,6 +22,7 @@ urlpatterns = [
     
     path('accounts/', include('accounts.urls')),
     path('', include('masterapp.urls')),
+    path('serverapp/', include('serverdataapp.urls')),
     
    
     

@@ -23,23 +23,25 @@ class Printerdata(models.Model):
                     ip_address=models.CharField(max_length=100,null=True)
                     printed_numbers=models.JSONField(null=True)
                     balanced_serialnumbers=models.JSONField(null=True)
-                    responsefield=models.BooleanField(default=False)
-                    preparebuttonresponse=models.BooleanField(default=False)
-                    stopbtnresponse=models.BooleanField(default=False)
-                    start_pause_btnresponse=models.BooleanField(default=False)
-                    pause_stop_btnresponse=models.BooleanField(default=False)
-                    return_slno_btn_response=models.BooleanField(default=False)
-                    batchstopmessage=models.BooleanField(default=False)
-                    label_response=models.CharField(max_length=100,null=True)
                     child_numbers=models.JSONField(null=True,blank=True)
                     scannergradefield=models.JSONField(null=True,blank=True)
-                    loadpause=models.BooleanField(default=True)
-                    
                     Rejectednumbers=models.JSONField(null=True,blank=True)
                     acceptednumbers=models.JSONField(null=True,blank=True)
                     
-                    # printerstatefield=models.BooleanField(null=True,default=False)
+                    load_button_resp=models.BooleanField(default=False)
+                    stop_button_resp=models.BooleanField(default=False)
+                    start_button_resp=models.BooleanField(default=False)
+                    return_button_resp=models.BooleanField(default=False)
+                    server_button_resp=models.BooleanField(default=False)
+                    trigger_flag=models.BooleanField(default=False)
                     
+                    current_production_date =models.DateField(null=True)
+                    current_production_time=models.TimeField(null=True)
+                    def __str__(self):
+                            return self.processordernumber
+                  
+                   
+                  
                     
 
                     # class Meta:
@@ -120,4 +122,9 @@ class Local_UserrolePermissions(models.Model):
     masterdata=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'}) 
     supervisor=models.JSONField(default={'CREATE':'Checked', 'READ': 'Checked', 'UPDATE':'Checked', 'DELETE':'Checked'})
     def __str__(self):
-    	return self.activity_name                                                                 
+    	return self.activity_name      
+ 
+class Inproperly_Closed(models.Model):
+        id = models.AutoField(primary_key=True)
+        close_update=models.CharField(max_length=100,null= True)                 
+                                                            
